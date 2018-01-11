@@ -260,5 +260,5 @@ class Prob3dPose:
         if norm_pose is not None:
             pose_3d = self.create_rec(norm_pose, weights) * _SCALE_3D
         else:
-            pose_3d = None
+            pose_3d = np.array([])
         return pose_3d
