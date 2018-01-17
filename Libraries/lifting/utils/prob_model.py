@@ -107,8 +107,8 @@ class Prob3dPose:
         d2 = d2.reshape(d2.shape[0], -1, 2).transpose(0, 2, 1)
         idx_consider = weights[0, 0].astype(np.bool)
         if np.sum(weights[:, 0].sum(1) >= config.MIN_NUM_JOINTS) == 0:
-            raise Exception(
-                'Not enough 2D joints identified to generate 3D pose')
+            return None, None
+
         d2[:, :, idx_consider] = Prob3dPose.centre_all(d2[:, :, idx_consider])
 
         # Height normalisation (2 meters)
@@ -257,5 +257,8 @@ class Prob3dPose:
         else:
             norm_pose, _ = Prob3dPose.normalise_data(pose_2d, weights)
 
-        pose_3d = self.create_rec(norm_pose, weights) * _SCALE_3D
+        if norm_pose is not None:
+            pose_3d = self.create_rec(norm_pose, weights) * _SCALE_3D
+        else:
+            pose_3d = np.array([])
         return pose_3d
