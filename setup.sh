@@ -15,6 +15,6 @@ rm -rf prob_model.tar.gz
 cd ../..
 
 echo 'Installing dependencies...'
-pip install scikit-image
+pip2 install scikit-image
 
 echo 'Done'
