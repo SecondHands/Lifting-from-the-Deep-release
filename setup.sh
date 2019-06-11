@@ -21,7 +21,8 @@ rm -rf prob_model.tar.gz
 cd ../..
 
 echo 'Installing dependencies...'
-pip3 install scikit-image
+pip3 install --user scikit-image
+pip3 install --user cython
 
 echo 'Cloning and installing dependencies...'
 mkdir Dependencies && cd Dependencies
